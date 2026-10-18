@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Kartičky na procvičování definic z NI-MPI.">
+  <title>MPI Kartičky – procvičování definic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">∈</div>
+        <div>
+          <div class="brand-kicker">NI-MPI · MATEMATIKA PRO INFORMATIKU</div>
+          <h1>Definice na procvičení<span class="brand-dot">.</span></h1>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="toolbar" aria-label="Stav procvičování">
+        <div class="source-info">
+          <span class="online-indicator" aria-hidden="true"></span>
+          <span id="sourceLabel">Lokální kartičky</span>
+        </div>
+        <div class="toolbar-right">
+          <span id="counterLabel" class="counter">0 / 0</span>
+        </div>
+      </section>
+
+      <section id="flashcard" class="flashcard" aria-label="Procvičovací kartička" hidden>
+        <div class="card-topline">
+          <div class="card-identification">
+            <span id="cardNumber" class="card-number">KARTIČKA</span>
+            <h2 id="cardTitle">Definice</h2>
+          </div>
+          <span id="sideBadge" class="side-badge">ZADÁNÍ</span>
+        </div>
+        <button id="previewButton" class="image-preview" type="button" aria-label="Zvětšit obrázek" title="Kliknutím obrázek zvětšíš">
+          <img id="cardImage" alt="Procvičovaná definice" decoding="async">
+          <span class="zoom-hint">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 5 5M10.8 8v5.6M8 10.8h5.6"/></svg>
+            Zvětšit
+          </span>
+        </button>
+        <div class="card-bottomline">
+          <span id="cardHelp">Zkus si definici vybavit, potom otoč kartu.</span>
+          <span class="card-image-tip">Klepnutím zvětšíš obrázek</span>
+        </div>
+      </section>
+
+      <section id="emptyState" class="empty-state" aria-live="polite">
+        <div class="empty-illustration" aria-hidden="true">
+          <svg viewBox="0 0 80 80"><rect x="12" y="16" width="56" height="48" rx="9"/><path d="M22 29h28M22 39h19M22 49h11"/><circle cx="58" cy="53" r="13"/><path d="M58 47v12M52 53h12"/></svg>
+        </div>
+        <h2 id="emptyTitle">Žádné kartičky</h2>
+        <p id="emptyText">Přidej dvojice do složky images/ a jejich názvy do images.js.</p>
+        <p class="empty-example"><code>definition_1.png</code> + <code>definition_1_blurred.png</code></p>
+      </section>
+
+      <div id="studyControls" class="study-controls" hidden>
+        <button id="flipButton" class="button button-primary" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v6h-6M4 17v-6h6"/><path d="M6 9a7 7 0 0 1 12.2-2L20 13M4 11l1.8 6A7 7 0 0 0 18 15"/></svg>
+          <span id="flipButtonText">Otočit kartu</span>
+          <kbd>mezerník</kbd>
+        </button>
+        <button id="nextButton" class="button button-secondary" type="button">
+          Další náhodná
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <div id="progressSection" class="progress-section" hidden>
+        <div class="progress-text"><span>Probráno v tomto kole</span><strong id="progressCount">0 z 0</strong></div>
+        <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+        <p class="footer-note">Kartičky se losují bez opakování, dokud neprojdeš celé kolo. Poté se zamíchají znovu.</p>
+      </div>
+    </main>
+
+    <footer class="site-footer">MPI kartičky <span aria-hidden="true">·</span> Funguje na počítači i mobilu</footer>
+  </div>
+
+  <div id="viewer" class="viewer" role="dialog" aria-modal="true" aria-label="Zvětšený obrázek" hidden>
+    <div class="viewer-bar">
+      <span id="viewerTitle" class="viewer-title">Definice</span>
+      <div class="viewer-actions">
+        <button id="zoomOut" type="button" aria-label="Oddálit" title="Oddálit">−</button>
+        <span id="zoomLevel">100 %</span>
+        <button id="zoomIn" type="button" aria-label="Přiblížit" title="Přiblížit">+</button>
+        <button id="zoomReset" type="button" class="viewer-reset" title="Vycentrovat obrázek">Reset</button>
+        <button id="viewerClose" type="button" aria-label="Zavřít zvětšení" title="Zavřít">×</button>
+      </div>
+    </div>
+    <div id="viewerCanvas" class="viewer-canvas" aria-label="Obrázek lze přibližovat dvěma prsty a posouvat">
+      <img id="viewerImage" alt="Zvětšená definice" draggable="false">
+    </div>
+    <div class="viewer-bottom">Dva prsty pro přiblížení · Tažením posun · Dvojklik pro přiblížení</div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script src="images.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
